@@ -1,0 +1,61 @@
+✅ STEP 1 — Check If Rofi Config Exists
+
+Run:
+
+ls ~/.config/rofi
+
+If you see files like:
+
+config.rasi
+themes/
+
+Then good 👍
+
+If it says “No such file” tell me.
+
+✅ STEP 2 — Create Proper Dotfiles Structure
+
+Remove old empty one first (if exists):
+
+rm -rf ~/dotfiles/rofi
+
+Now create correct structure:
+
+mkdir -p ~/dotfiles/rofi/.config
+✅ STEP 3 — Copy Rofi Into Dotfiles
+cp -rv ~/.config/rofi ~/dotfiles/rofi/.config/
+
+You should see output showing files copied.
+
+✅ STEP 4 — Verify Structure (Important)
+tree -a ~/dotfiles/rofi
+
+You should see something like:
+
+rofi
+└── .config
+    └── rofi
+        ├── config.rasi
+        └── themes
+
+If you see that → PERFECT for stow.
+
+✅ STEP 5 — Backup Original
+mv ~/.config/rofi ~/.config/rofi.backup
+✅ STEP 6 — Stow It
+cd ~/dotfiles
+stow rofi
+✅ STEP 7 — Confirm Symlink
+ls -l ~/.config | grep rofi
+
+You should see:
+
+rofi -> ../dotfiles/rofi/.config/rofi
+rofi.backup
+🧪 Test It
+
+Run:
+
+rofi -show drun
+
+If it opens normally → success 🎉
